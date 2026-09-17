@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}录入商品 · 商品工作台{% endblock %}
+{% block content %}
+<a href="/">← 返回商品列表</a><h1>录入商品事实</h1>
+<p>款号与名称必填。仅填写已确认的信息；未知字段留空，不要猜测。</p>
+{% if errors %}<div class="errors" role="alert"><h2>未能保存，请检查</h2><ul>{% for error in errors %}<li>{{ error }}</li>{% endfor %}</ul></div>{% endif %}
+<form method="post" action="/products" class="panel">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label for="sku">款号（必填）</label><p id="sku-help" class="hint">最多 64 字符，同一款号只能录入一次，区分大小写。</p>
+<input id="sku" name="sku" required maxlength="64" value="{{ values.get('sku', '') }}" aria-describedby="sku-help">
+<label for="name">名称（必填）</label><input id="name" name="name" required maxlength="200" value="{{ values.get('name', '') }}">
+{% for key, label in [('colors', '颜色'), ('sizes', '尺码'), ('selling_points', '已确认卖点')] %}
+<label for="{{ key }}">{{ label }}</label><p class="hint" id="{{ key }}-help">每行一项，最多 30 项，每项 200 字符；不知道可留空。</p>
+<textarea id="{{ key }}" name="{{ key }}" rows="3" maxlength="6030" aria-describedby="{{ key }}-help">{{ values.get(key, '') }}</textarea>
+{% endfor %}
+<label for="material">已确认材质</label><p id="material-help" class="hint">以已核实的商品资料为准，最多 1000 字符。未知请留空。</p>
+<textarea id="material" name="material" rows="3" maxlength="1000" aria-describedby="material-help">{{ values.get('material', '') }}</textarea>
+<button type="submit">保存商品事实</button>
+</form>
+{% endblock %}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}商品工作台{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header><a href="/" class="brand">商品内容工作台</a><span>本地单用户 · 服饰详情文案</span></header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer>当前阶段：商品事实录入。尚未接入生成、审核和导出。</footer>
+</body>
+</html>

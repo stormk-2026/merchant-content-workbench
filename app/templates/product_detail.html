@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }} · 商品工作台{% endblock %}
+{% block content %}
+<a href="/">← 返回商品列表</a><h1>{{ product.name }}</h1><p>款号：{{ product.sku }}</p>
+<section class="panel"><h2>商品事实</h2><dl>
+{% for label, values in [('颜色', product.colors), ('尺码', product.sizes), ('已确认卖点', product.selling_points)] %}
+<dt>{{ label }}</dt><dd>{% if values %}<ul>{% for value in values %}<li>{{ value }}</li>{% endfor %}</ul>{% else %}<span class="unknown">未确认（留空）</span>{% endif %}</dd>
+{% endfor %}
+<dt>已确认材质</dt><dd>{{ product.material if product.material else '未确认（留空）' }}</dd>
+</dl></section>
+<section class="notice" aria-labelledby="generation-status"><h2 id="generation-status">生成服务未配置</h2><p>当前仅保存商品事实，尚未创建生成任务，也没有生成文案。真实文本生成将在下一阶段接入。</p></section>
+{% endblock %}

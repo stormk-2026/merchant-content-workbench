@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="heading"><div><h1>我的商品</h1><p>先记录确定的信息，让后续文案有据可查。</p></div><a class="button" href="/products/new">录入商品</a></div>
+{% if products %}
+<div class="panel"><table><caption>已录入的商品</caption><thead><tr><th scope="col">款号</th><th scope="col">名称</th><th scope="col">材质确认情况</th><th scope="col">操作</th></tr></thead>
+<tbody>{% for product in products %}<tr><td>{{ product.sku }}</td><td>{{ product.name }}</td><td>{{ '已填写' if product.material else '待确认' }}</td><td><a href="/products/{{ product.id }}" aria-label="查看 {{ product.name }} 的商品事实">查看商品</a></td></tr>{% endfor %}</tbody></table></div>
+{% else %}<section class="panel"><h2>还没有商品</h2><p>从一件自制样例商品开始。未知的颜色、尺码或材质可以留空。</p></section>{% endif %}
+{% endblock %}

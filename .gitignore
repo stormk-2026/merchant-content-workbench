@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env
+*.db
+*.db-*
+*.sqlite*
+.DS_Store
+
+# 本地学习笔记与开发过程记录，不上传仓库
+docs/LEARNING*.md
+docs/PROGRESS.md
